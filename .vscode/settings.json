@@ -1,0 +1,6 @@
+{
+    "genieai.enableConversationHistory": true,
+    "genieai.openai.model": "gpt-4",
+    "genieai.openai.organization": "org-ludP49HGsaZh2YLNaO9z9Uv0",
+    "chatgpt.apiKey": "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"
+}
