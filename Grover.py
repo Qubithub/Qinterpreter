@@ -14,22 +14,42 @@ from quantumgateway.main import translate_to_framework, simulate_circuit
 circuit = QuantumCircuit(2,2)  
 
 
+def inicializar_grover(qc, qubits):
+    """Apply a H-gate to 'qubits' in qc"""
+    for q in qubits:
+        qc.add_gate(QuantumGate("h", [q]))
+    return qc
+
+circuit = inicializar_grover(circuit, [0,1])
+circuit.add_gate(QuantumGate("cz", [0,1]))
+
+
+# Diffusion operator (U_s)
 circuit.add_gate(QuantumGate("h", [0]))
-circuit.add_gate(QuantumGate("cnot", [0,1]))
+circuit.add_gate(QuantumGate("h", [1]))
+
+circuit.add_gate(QuantumGate("z", [0]))
+circuit.add_gate(QuantumGate("z", [1]))
+
+circuit.add_gate(QuantumGate("cz", [0,1]))
+
+
+circuit.add_gate(QuantumGate("h", [0]))
+circuit.add_gate(QuantumGate("h", [1]))
+
+
 
 circuit.add_gate(QuantumGate("MEASURE", [0,0]))
-
 circuit.add_gate(QuantumGate("MEASURE", [1,1]))
 
 
-
-selected_framework = 'qiskit'  # Change this to the desired framework
+selected_framework = 'amazonbraket'  # Change this to the desired framework
 translated_circuit = translate_to_framework(circuit, selected_framework)
 
 translated_circuit.print_circuit() 
 
 
-# Simulate the circuit and print the result
+#Simulate the circuit and print the result
 print("The results of our simulated circuit are: ")
 
 print(simulate_circuit(circuit, selected_framework))

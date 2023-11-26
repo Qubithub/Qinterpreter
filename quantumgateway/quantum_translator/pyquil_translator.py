@@ -1,6 +1,6 @@
 from quantumgateway.quantum_translator.quantum_translator import QuantumTranslator
 from pyquil import Program
-from pyquil.gates import H, CNOT, RX, RY, RZ, CCNOT, X, Y, Z, MEASURE, SWAP, CPHASE
+from pyquil.gates import H, CNOT, RX, RY, RZ, CCNOT, X, Y, Z,  MEASURE, SWAP, CPHASE
 from pyquil.quil import MemoryReference  # Import MemoryReference
 from pyquil.api import WavefunctionSimulator
 from pyquil import get_qc
@@ -81,6 +81,14 @@ class PyQuilTranslator(QuantumTranslator):
                 program += SWAP(qubits[gate.qubits[0]], qubits[gate.qubits[1]])
             elif gate.name.lower() == "cphase":
                 program += CPHASE(gate.params[0], qubits[gate.qubits[0]], qubits[gate.qubits[1]])
+            elif gate.name.lower() == "cz":
+                program += Z(qubits[gate.qubits[1]]).controlled(qubits[gate.qubits[0]])
+
+            elif gate.name.lower() == "cy":
+                cy_gate = Y(qubits[gate.qubits[1]]).controlled()
+                program += cy_gate(qubits[gate.qubits[0]], qubits[gate.qubits[1]])
+
+
             elif gate.name.lower() == "measure":
                 program += MEASURE(qubits[gate.qubits[0]], ro[gate.qubits[1]])  # Use ro instead of qubits
             # Add other gate translations as needed

@@ -46,6 +46,10 @@ class BraketTranslator(QuantumTranslator):
                 circuit.swap(gate.qubits[0], gate.qubits[1])
             elif gate.name.lower() == "cphase":
                 circuit.cphaseshift(gate.qubits[0], gate.qubits[1], gate.params[0])
+            elif gate.name.lower() == "cz":
+                circuit.cz(gate.qubits[0], gate.qubits[1])
+            elif gate.name.lower() == "cy":
+                circuit.cy(gate.qubits[0], gate.qubits[1])
             elif gate.name.lower() == 'measure':
                 pass
             # Add other gate translations as needed

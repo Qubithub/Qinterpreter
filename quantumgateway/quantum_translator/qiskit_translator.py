@@ -37,6 +37,12 @@ class QiskitTranslator(QuantumTranslator):
                 self.qc.cp(gate.params[0], gate.qubits[0], gate.qubits[1])
             elif gate.name.lower() == "measure":
                 self.qc.measure(gate.qubits[0], gate.qubits[1])
+            elif gate.name.lower() == "cz":
+                self.qc.cz(gate.qubits[0], gate.qubits[1])
+            elif gate.name.lower() == "cy":
+                self.qc.cy(gate.qubits[0], gate.qubits[1])
+
+            # Add other gate translations as needed
         self.translated_circuit = self.qc  
         return self  # And return self instead of self.qc
 
@@ -50,6 +56,7 @@ class QiskitTranslator(QuantumTranslator):
         return counts
     
     def print_circuit(self):
+        
         print(self.translated_circuit.draw())
 
 #--------------------------------------------------------------

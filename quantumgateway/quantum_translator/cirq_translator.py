@@ -59,6 +59,10 @@ class CirqTranslator(QuantumTranslator):
                 circuit.append(cirq.SWAP(qubits[gate.qubits[0]], qubits[gate.qubits[1]]))
             elif gate.name.lower() == "cphase":
                 circuit.append(cirq.CZPowGate(exponent=gate.params[0]/np.pi)(qubits[gate.qubits[0]], qubits[gate.qubits[1]]))
+            elif gate.name.lower() == "cz":
+                circuit.append(cirq.CZ(cirq.LineQubit(gate.qubits[0]), cirq.LineQubit(gate.qubits[1])))
+            elif gate.name.lower() == "cy":
+                circuit.append(cirq.ControlledGate(cirq.Y).on(cirq.LineQubit(gate.qubits[0]), cirq.LineQubit(gate.qubits[1])))
             elif gate.name.lower() == "measure":
                 meas_qubit = qubits[gate.qubits[0]]
                 #print(f"Measuring qubit: {gate.qubits[0]}")  # Add this line for debugging

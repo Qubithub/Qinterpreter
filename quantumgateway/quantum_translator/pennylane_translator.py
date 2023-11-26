@@ -43,8 +43,13 @@ class PennyLaneTranslator:
                 qml.SWAP(wires=gate.qubits)
             elif gate.name.lower() == "cphase":
                 qml.CRot(gate.params[0], 0, 0, wires=gate.qubits)
+            elif gate.name.lower() == "cz":
+                qml.CZ(wires=[gate.qubits[0], gate.qubits[1]])
+            elif gate.name.lower() == "cy":
+                qml.CY(wires=[gate.qubits[0], gate.qubits[1]])
             elif gate.name.lower() == "measure":
                 self.measurements.append(target)
+
             # Perform measurements if specified
     
         measurement_results = None
