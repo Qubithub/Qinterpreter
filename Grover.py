@@ -43,7 +43,7 @@ circuit.add_gate(QuantumGate("MEASURE", [0,0]))
 circuit.add_gate(QuantumGate("MEASURE", [1,1]))
 
 
-selected_framework = 'amazonbraket'  # Change this to the desired framework
+selected_framework = 'pennylane'  # Change this to the desired framework
 translated_circuit = translate_to_framework(circuit, selected_framework)
 
 translated_circuit.print_circuit() 

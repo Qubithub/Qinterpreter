@@ -6,6 +6,22 @@ class QiskitTranslator(QuantumTranslator):
     def __init__(self):
         self.qc = None
         self.translated_circuit = None  # Add this
+    def get_statevector(self):
+        """
+        Simulates the circuit and returns the statevector.
+        This method is intended to be used before any measurement gates are added to the circuit,
+        as measurements collapse the statevector.
+        """
+        # Using the statevector simulator backend
+        statevector_simulator = Aer.get_backend('statevector_simulator')
+
+        # Execute the circuit on the statevector simulator
+        job = execute(self.qc, statevector_simulator)
+        result = job.result()
+
+        # Get the statevector from the result
+        statevector = result.get_statevector(self.qc)
+        return statevector
 
     def translate(self, hl_circuit):
         from qiskit import QuantumCircuit as QiskitQuantumCircuit
