@@ -20,8 +20,6 @@ circuit.add_gate(QuantumGate("cphase", [0, 1], [math.pi/4]))
 
 bloch_sphere(circuit)
 
-
-
 circuit.add_gate(QuantumGate("MEASURE", [0,0]))
 circuit.add_gate(QuantumGate("MEASURE", [1,1]))
 

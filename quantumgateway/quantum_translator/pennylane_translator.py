@@ -74,6 +74,9 @@ class PennyLaneTranslator:
         measurement_results = qnode([])
 
         if self.measurements:
+            if isinstance(measurement_results, list):
+                measurement_results = np.array(measurement_results)
+
             #binary_results = [''.join('1' if bit == -1 else '0' for bit in result) for result in measurement_results.T]
             binary_results = [''.join('1' if bit == -1 else '0' for bit in result)[::-1] for result in measurement_results.T]
 

@@ -51,7 +51,7 @@ for i in range(4):
 #-----------------------------------------------------------------------------
 
 # Example usage
-selected_framework = 'qiskit'  # Change this to the desired framework
+selected_framework = 'pennylane'  # Change this to the desired framework
 translated_circuit = translate_to_framework(circ, selected_framework)
 translated_circuit.print_circuit() 
 
